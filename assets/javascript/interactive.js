@@ -1,69 +1,51 @@
 $(document).ready(function () {
     var brass = ["Trumpet", "Tuba", "Trombone", "Horn"];
-    var woodwind = ["Clarinet", "Tenor Saxophone", "Bassoon", "Piccolo"];
+    var woodwind = ["Clarinet", "Saxophone", "Bassoon", "Piccolo"];
     var percussion = ["Marimba", "Timpani", "Euphonium", "Vibraphone"];
-    var string = ["Cello", "Hurdy Gurdy", "Violin", "Bass"];
+    var string = ["Cello", "Viola", "Violin", "Bass"];
     var composer = ["Debussy", "Albeniz", "Tchaikovsky", "Messiaen"];
     var correct = 0;
     var incorrect = 0;
     var intervalId;
 
-    function start() {
-        $("#clear").click(function () {
-            $("#initiate").empty();
-            questionGenerator();
-        });
+    brassFunction();
+
+    function stopTimer() {
+        clearInterval(intervalId);
+
     }
-
-    function questionGenerator() {
-
-
-        var brassFunc = brassFunction();
-        var woodwindFunc = woodwindFunction();
-        var percussionFunc = percussionFunction();
-        var stringFunc = stringFunction();
-        var composerFunc = composerFunction();
-
-        var functionArray = [brassFunc, woodwindFunc, percussionFunc, stringFunc, composerFunc];
-
-        for (var i = 0; i < functionArray.length; i++) {
-            //iterate each individual function...
-            currentQuestion = functionArray[i];
-
-            //on answer, change question
-            questionGenerator();
-        }
-    }
-
-    function timer() {
-        $("#timeLeft").append(losingTime());
-    }
-
 
     function losingTime() {
-        var time = 50;
+        var time = 30;
 
         function countdown() {
             intervalId = setInterval(function () {
                 $("#timeLeft").html(time);
+
                 
-                console.log(time);
                 if (time == 0) {
                     stopTimer();
-                } time--;
+                    $("#timeLeft").text("Out of time!");
+                }
+                time--;
             }, 1000);
-            
+
         }
 
-        function stopTimer() {
-            clearInterval(intervalId);
-                    
-                    $("#timeLeft").text("Out of time!");
-        }
-        countdown();       
+        
+        countdown();
     }
 
-    losingTime();
+    function clearIt() {
+        $("#questionGoesHere").empty();
+    }
+
+    
+    function resultsInfo() {
+        $("#correct").html("<h1>You successfully answered " + correct + " questions correctly!");
+        $("#incorrect").html("<h1>You answered " + incorrect + " questions incorrectly.");
+    }
+    
 
 
     function brassFunction() {
@@ -72,60 +54,190 @@ $(document).ready(function () {
             var className = brass[i];
 
             var log = $("#questionGoesHere").append("<li class='" + className + "'>" + brass[i] + "</li>");
-            console.log(log);
+            
         }
 
         function chooseAnswer() {
             $(".Tuba").click(function () {
                 correct++;
                 alert("correct");
+                clearIt();
+                woodwindFunction();
             });
             $(".Trombone").click(function () {
                 alert("incorrect");
                 incorrect++;
+                clearIt();
+                woodwindFunction();
             });
             $(".Trumpet").click(function () {
                 alert("incorrect");
                 incorrect++;
+                clearIt();
+                woodwindFunction();
             });
             $(".Horn").click(function () {
                 alert("incorrect");
                 incorrect++;
+                clearIt();
+                woodwindFunction();
             });
 
         }
         chooseAnswer();
+        losingTime();
+        resultsInfo();
     }
-
-    brassFunction();
 
     function woodwindFunction() {
         $("#questionGoesHere").append("<p class='question'>Which is the smallest woodwind instrument?</p>");
         for (var i = 0; i < woodwind.length; i++) {
-            $("#questionGoesHere").append("<li class='option" + i + "'>" + woodwind[i] + "</li>");
+            var className = woodwind[i];
+            $("#questionGoesHere").append("<li class='" + className + "'>" + woodwind[i] + "</li>");
         }
+
+        function chooseAnswer() {
+            $(".Piccolo").click(function () {
+                correct++;
+                alert("correct");
+                clearIt();
+                percussionFunction();
+            });
+            $(".Clarinet").click(function () {
+                alert("incorrect");
+                incorrect++;
+                clearIt();
+                percussionFunction();
+            });
+            $(".Bassoon").click(function () {
+                alert("incorrect");
+                incorrect++;
+                clearIt();
+                percussionFunction();
+            });
+            $(".Saxophone").click(function () {
+                alert("incorrect");
+                incorrect++;
+                clearIt();
+                percussionFunction();
+            });
+        }
+        chooseAnswer();
+        losingTime();
+        resultsInfo();
     }
 
     function percussionFunction() {
         $("#questionGoesHere").append("<p class='question'>Which of the following is not a percussion instrument?</p>");
         for (var i = 0; i < percussion.length; i++) {
-            $("#questionGoesHere").append("<li class='option" + i + "'>" + percussion[i] + "</li>");
+            var className = percussion[i];
+            $("#questionGoesHere").append("<li class='" + className + "'>" + percussion[i] + "</li>");
         }
+
+        function chooseAnswer() {
+            $(".Euphonium").click(function () {
+                correct++;
+                alert("correct");
+                clearIt();
+                stringFunction();
+            });
+            $(".Marimba").click(function () {
+                alert("incorrect");
+                incorrect++;
+                clearIt();
+                stringFunction();
+            });
+            $(".Vibraphone").click(function () {
+                alert("incorrect");
+                incorrect++;
+                clearIt();
+                stringFunction();
+            });
+            $(".Timpani").click(function () {
+                alert("incorrect");
+                incorrect++;
+                clearIt();
+                stringFunction();
+            });
+        }
+        chooseAnswer();
+        losingTime();
+        resultsInfo();
     }
 
     function stringFunction() {
         $("#questionGoesHere").append("<p class='question'>Which of the following string instruments is most common in jazz?</p>");
         for (var i = 0; i < string.length; i++) {
-            $("#questionGoesHere").append("<li class='option" + i + "'>" + string[i] + "</li>");
+            var className = string[i];
+            $("#questionGoesHere").append("<li class='" + className + "'>" + string[i] + "</li>");
         }
+
+        function chooseAnswer() {
+            $(".Bass").click(function () {
+                correct++;
+                alert("correct");
+                clearIt();
+                composerFunction();
+            });
+            $(".Viola").click(function () {
+                alert("incorrect");
+                incorrect++;
+                clearIt();
+                composerFunction();
+            });
+            $(".Violin").click(function () {
+                alert("incorrect");
+                incorrect++;
+                clearIt();
+                composerFunction();
+            });
+            $(".Cello").click(function () {
+                alert("incorrect");
+                incorrect++;
+                clearIt();
+                composerFunction();
+            });
+        }
+        chooseAnswer();
+        losingTime();
+        resultsInfo();
     }
 
     function composerFunction() {
         $("#questionGoesHere").append("<p class='question'>Which of the following composers made the best music?</p>");
         for (var i = 0; i < composer.length; i++) {
-            $("#questionGoesHere").append("<li class='option" + i + "'>" + composer[i] + "</li>");
+            var className = composer[i];
+            $("#questionGoesHere").append("<li class='" + className + "'>" + composer[i] + "</li>");
         }
+
+        function chooseAnswer() {
+            $(".Debussy").click(function () {
+                correct++;
+                alert("correct");
+                clearIt();
+                
+            });
+            $(".Albeniz").click(function () {
+                alert("correct");
+                correct++;
+                clearIt();
+                
+            });
+            $(".Tchaikovsky").click(function () {
+                alert("correct");
+                correct++;
+                clearIt();
+                
+            });
+            $(".Messiaen").click(function () {
+                alert("correct");
+                correct++;
+                clearIt();
+                
+            });
+        }
+        chooseAnswer();
+        losingTime();
+        resultsInfo();
     }
-
-
 });
