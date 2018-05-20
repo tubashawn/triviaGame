@@ -1,0 +1,44 @@
+body {
+    background-color: rgb(193, 212, 208);
+}
+
+#gameName {
+    text-align: center;
+    font-size: 68px;
+    font-family: 'Alex Brush', cursive;
+    padding: 5%;
+    background-color: #223333;
+    color: whitesmoke;
+    margin-top: 3%;
+    border: 2px solid rgb(34, 34, 34);
+}
+
+.middle {
+    padding: 2%;
+    margin-top: 3%;
+}
+
+#instructions {
+    font-size: 28px;
+    text-align: center;
+}
+
+.timeCard {
+    font-size: 28px;
+    text-align: center;
+}
+
+.questionBox {
+    background-color: #223333;
+    border: 2px solid rgb(34, 34, 34);
+}
+
+#questionGoesHere {
+    font-size: 20px;
+    font-weight: bolder;
+    color: rgb(117, 112, 112);
+}
+
+.questionBoxText {
+    color: whitesmoke;
+}
